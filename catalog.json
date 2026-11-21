@@ -1,0 +1,72 @@
+{
+  "surum": 1,
+  "guncelleme": "2026-11-21T19:26:21Z",
+  "diller": [
+    "tr",
+    "en",
+    "de",
+    "ru",
+    "ar"
+  ],
+  "gruplar": [
+    {
+      "id": "birds",
+      "ad": {
+        "tr": "Kuşlar",
+        "en": "Birds",
+        "de": "Vögel",
+        "ru": "Птицы",
+        "ar": "الطيور"
+      },
+      "sayi": {
+        "tr": 30,
+        "en": 30,
+        "de": 30,
+        "ru": 30,
+        "ar": 27
+      },
+      "makale": {
+        "tr": {
+          "dosya": "tr_birds.json.gz",
+          "boyut": 67303,
+          "sha256": "64f2009c6ba06c8f4b72dbc352b0df219fc83eb9c6fa0388b98a4fbbfa658f3f",
+          "url": "https://github.com/ziyaarslanturk/ansiklopedi/releases/download/ansiklopedi/tr_birds.json.gz"
+        },
+        "en": {
+          "dosya": "en_birds.json.gz",
+          "boyut": 156595,
+          "sha256": "9c25c453b523deb4fb853e808b51e13fb049bbce2745f1a6e47b66ebf4c79677",
+          "url": "https://github.com/ziyaarslanturk/ansiklopedi/releases/download/ansiklopedi/en_birds.json.gz"
+        },
+        "de": {
+          "dosya": "de_birds.json.gz",
+          "boyut": 167728,
+          "sha256": "982d8bdb669953e925dd12827ad11e90b4065b77236ff7b99e99014da3c7f86b",
+          "url": "https://github.com/ziyaarslanturk/ansiklopedi/releases/download/ansiklopedi/de_birds.json.gz"
+        },
+        "ru": {
+          "dosya": "ru_birds.json.gz",
+          "boyut": 188479,
+          "sha256": "35e67e95d92c487155f1ce7a5e21ae93f332cd4482290530f733c3f3184d0d0d",
+          "url": "https://github.com/ziyaarslanturk/ansiklopedi/releases/download/ansiklopedi/ru_birds.json.gz"
+        },
+        "ar": {
+          "dosya": "ar_birds.json.gz",
+          "boyut": 115764,
+          "sha256": "ad75c6efcaf97589ce1d44023b799482e57d47a1a43ce91aa6811f08c98a4aeb",
+          "url": "https://github.com/ziyaarslanturk/ansiklopedi/releases/download/ansiklopedi/ar_birds.json.gz"
+        }
+      },
+      "gorseller": [
+        {
+          "dosya": "gorsel_birds_1.zip",
+          "boyut": 14111924,
+          "sha256": "4ccf1cfbfafc78b7023ec48a7748eb7ed74463b6c7625027e1286684477fa149",
+          "url": "https://github.com/ziyaarslanturk/ansiklopedi/releases/download/ansiklopedi/gorsel_birds_1.zip"
+        }
+      ],
+      "tamam": true,
+      "guncelleme": "2026-11-21T19:26:02.885Z"
+    }
+  ]
+}
