@@ -1,0 +1,2 @@
+# ansiklopedi
+wiki bilgi paketleri
