@@ -1,0 +1,11 @@
+[
+  { "id": "mammals",    "klad": "Q7377",   "min_sl": 12, "limit": 1500, "ad": { "tr": "Memeliler", "en": "Mammals", "de": "Säugetiere", "ru": "Млекопитающие", "ar": "الثدييات" } },
+  { "id": "birds",      "klad": "Q5113",   "min_sl": 10, "limit": 3000, "ad": { "tr": "Kuşlar", "en": "Birds", "de": "Vögel", "ru": "Птицы", "ar": "الطيور" } },
+  { "id": "reptiles",   "klad": "Q10811",  "min_sl": 8,  "limit": 1500, "ad": { "tr": "Sürüngenler", "en": "Reptiles", "de": "Reptilien", "ru": "Пресмыкающиеся", "ar": "الزواحف" } },
+  { "id": "amphibians", "klad": "Q10908",  "min_sl": 6,  "limit": 1000, "ad": { "tr": "Amfibiler", "en": "Amphibians", "de": "Amphibien", "ru": "Земноводные", "ar": "البرمائيات" } },
+  { "id": "fish",       "klad": "Q127282", "min_sl": 8,  "limit": 2500, "ad": { "tr": "Balıklar", "en": "Fish", "de": "Fische", "ru": "Рыбы", "ar": "الأسماك" } },
+  { "id": "insects",    "klad": "Q1390",   "min_sl": 15, "limit": 2500, "ad": { "tr": "Böcekler", "en": "Insects", "de": "Insekten", "ru": "Насекомые", "ar": "الحشرات" } },
+  { "id": "arachnids",  "klad": "Q1358",   "min_sl": 8,  "limit": 800,  "ad": { "tr": "Örümcekgiller", "en": "Arachnids", "de": "Spinnentiere", "ru": "Паукообразные", "ar": "العنكبيات" } },
+  { "id": "plants",     "klad": "Q756",    "min_sl": 15, "limit": 5000, "ad": { "tr": "Bitkiler", "en": "Plants", "de": "Pflanzen", "ru": "Растения", "ar": "النباتات" } },
+  { "id": "mushrooms",  "klad": "Q764",    "min_sl": 8,  "limit": 1500, "ad": { "tr": "Mantarlar", "en": "Mushrooms", "de": "Pilze", "ru": "Грибы", "ar": "الفطر" } }
+]
