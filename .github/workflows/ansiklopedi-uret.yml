@@ -1,0 +1,91 @@
+name: Ansiklopedi üret
+
+on:
+  workflow_dispatch:
+    inputs:
+      grup:
+        description: "Grup kimliği (gruplar.json içindeki id) veya hepsi"
+        default: "birds"
+      limit:
+        description: "Deneme için tür sayısı sınırı (0 yazarsan grubun tam sınırı kullanılır)"
+        default: "30"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ansiklopedi-uret
+  cancel-in-progress: false
+
+jobs:
+  liste:
+    runs-on: ubuntu-latest
+    outputs:
+      ids: ${{ steps.l.outputs.ids }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: l
+        env:
+          HEDEF: ${{ inputs.grup || 'hepsi' }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ids=$(jq -c --arg s "$HEDEF" 'if $s=="hepsi" then [.[].id] else [.[]|select(.id==$s)|.id] end' gruplar.json)
+          if [ "$ids" = "[]" ]; then
+            echo "Grup bulunamadı: $HEDEF"; exit 1
+          fi
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+          gh release view ansiklopedi >/dev/null 2>&1 || \
+            gh release create ansiklopedi --title "Ansiklopedi paketleri" \
+              --notes "Metin: Vikipedi (CC BY-SA 4.0). Görseller: Wikimedia Commons, her görselin yazar ve lisansı makale kaydında yazılıdır."
+
+  uret:
+    needs: liste
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        id: ${{ fromJson(needs.liste.outputs.ids) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Grubu üret ve Release'e yükle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node tools/uret.js "${{ matrix.id }}" "${{ inputs.limit || '0' }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: meta-${{ matrix.id }}
+          path: meta/${{ matrix.id }}.json
+
+  birlestir:
+    needs: uret
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: meta-*
+          merge-multiple: true
+          path: yeni
+      - name: catalog.json güncelle
+        run: |
+          shopt -s nullglob
+          files=(yeni/*.json)
+          if [ ${#files[@]} -eq 0 ]; then echo "Yeni dosya yok"; exit 0; fi
+          [ -f catalog.json ] || echo '{"surum":1,"gruplar":[]}' > catalog.json
+          jq -s --arg t "$(date -u +%FT%TZ)" '
+            .[0] as $eski | .[1:] as $yeni |
+            {surum:1, guncelleme:$t, diller:["tr","en","de","ru","ar"],
+             gruplar: (($eski.gruplar + $yeni) | group_by(.id) | map(last) | sort_by(.id))}
+          ' catalog.json "${files[@]}" > c.tmp
+          mv c.tmp catalog.json
+          git config user.name "ansiklopedi-bot"
+          git config user.email "ansiklopedi-bot@users.noreply.github.com"
+          git add catalog.json
+          git diff --cached --quiet || git commit -m "catalog.json güncellendi"
+          git push
